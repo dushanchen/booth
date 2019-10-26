@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  /* font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif; */
+  font: 14px/1.8 arial, "times new roman", tahoma, "Microsoft Yahei", "Microsoft JhengHei", sans-serif;
+  text-decoration: none;
+  /* font-size: 14px; */
+  color: #4A4A4A;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+li,
+ol {
+  list-style: none
+}
+
+img {
+  vertical-align: middle;
+  border: 0 none;
+  max-width: 100%;
+}
+
+/* 横向排列 */
+
+.dis-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* 竖向排列 */
+
+.flex-direction {
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+/* 横向居中 */
+
+.jus-contenr {
+  -webkit-box-pack: center;
+  -moz-justify-content: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+/* 横向左对齐 */
+
+.jus-end {
+  -webkit-box-pack: flex-end;
+  -moz-justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+}
+
+/* 横向平均分布 */
+
+.jus-between {
+  -webkit-box-pack: space-between;
+  -moz-justify-content: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+/* 竖向居中 */
+
+.items-center {
+  -webkit-box-align: center;
+  -moz-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+/* 竖向底部对齐 */
+
+.items-end {
+  -webkit-box-align: flex-end;
+  -moz-align-items: flex-end;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+}
+
+/* 换行 */
+
+.flex-wrap {
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.he10 {
+  height: 10px;
+}
+
+.he20 {
+  height: 20px;
+}
+
+.he30 {
+  height: 30px;
+}
+
+.he40 {
+  height: 40px;
+}
+
+.he50 {
+  height: 50px;
+}
+
+.he80 {
+  height: 80px;
+}
+
+.he100 {
+  height: 100px;
+}
+
+.col-1 {
+  color: #fff;
+}
+
+.col-2 {
+  color: #4A4A4A;
+}
+
+.col-3 {
+  color: #59C2FA;
+}
+
+.back-1 {
+  background: #59C2FA;
+}

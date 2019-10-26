@@ -1,0 +1,22 @@
+https://lanhuapp.com/url/sgwCS 引导页区  1
+https://lanhuapp.com/url/QUVfX 搜索 1
+https://lanhuapp.com/url/DLoHJ 未登录 1
+https://lanhuapp.com/url/15I7o 注册区 1
+https://lanhuapp.com/url/NpxeB 企业登录主页区 0.5
+https://lanhuapp.com/url/fq6Pz 消息区 1
+https://lanhuapp.com/url/mau29 展会区 0.5
+https://lanhuapp.com/url/H7hzl 企业区 1
+https://lanhuapp.com/url/C4BP0 企业主页区 1
+
+// this.$store.state.xxx
+// this.$store.dispatch
+// this.$store.commit
+市场及销售
+采购
+管理
+技术
+生产及运营
+其他   
+
+
+https://segmentfault.com/q/1010000008942672
