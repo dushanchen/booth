@@ -11,7 +11,8 @@
               <span>{{datalist.user.name}}</span>
               <div>
                 <p>普通会员</p>
-                <p @click="toInfo">修改资料</p>
+                <p @click="toInfo">编辑资料</p>
+                <p @click="Toforget">修改密码</p>
               </div>
             </div>
             <p>{{datalist.user.fansNumber}}位关注者</p>
@@ -42,7 +43,7 @@
           <div class="coreAbouMoverList">
             <p v-if="AllPartnerData.length == 0">暂无数据</p>
             <div class="coreAbouMoverItem" v-for="(item, index) in AllPartnerData" :key="index">
-              <div class="coreAbouMoverItemImg" @click="toOthercore(item.id)">
+              <div class="coreAbouMoverItemImg" @click="toOthercore(item.id)" :title="item.name">
                 <img v-if="item.url" :src="item.url" alt>
                 <img src="../../assets/images/home/foodlogo.png" alt v-else>
               </div>
@@ -55,7 +56,7 @@
         </div>
         <div class="coreAboutTop">
           <div class="coreAboutintroduction">
-            <div class="coreAboutHead">关于我们</div>
+            <p class="coreAboutHead">关于我们</p>
             <div class="coreAboutText">{{datalist.user.summary}}</div>
             <div class="coreAboutHead">公司详情</div>
             <div class="coreAboutTtile">公司总部</div>
@@ -297,7 +298,7 @@ export default {
     },
     copyUrl(id) {
       // var clipBoardContent = "";
-      let url = `http://47.101.165.134/#/othercore?id=${id}`;
+      let url = `http://www.booth.vip/#/othercore?id=${id}`;
       let textArea = document.createElement("textarea");
       textArea.style.position = "fixed";
       textArea.style.top = 0;
@@ -356,7 +357,12 @@ export default {
         name: `infoOne`,
         params: { id: this.$store.state.user.UserID }
       });
-    }
+    },
+    Toforget() {
+      this.$router.push({
+        path: `/forgetPass`
+      });
+    },
   },
   components: {
     AboutList

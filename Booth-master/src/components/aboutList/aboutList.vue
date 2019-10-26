@@ -168,7 +168,9 @@
           v-for="(item, index) in interestedExhibitions"
           :key="index"
           @click="toDetails(item.id)"
-        >{{item.name}}</div>
+        >
+          <p :class="{InterestItemAct: item.id !== '0'}">{{item.name}}</p>
+        </div>
       </div>
       <div class="aboutListMiddlelist" style="text-align: center;" v-else>暂无感兴趣的展会</div>
     </div>
@@ -295,7 +297,7 @@ export default {
     },
     copyUrl(id) {
       // var clipBoardContent = "";
-      let url = `http://47.101.165.134/#/othercore?id=${id}`;
+      let url = `http://www.booth.vip/#/othercore?id=${id}`;
       let textArea = document.createElement("textarea");
       textArea.style.position = "fixed";
       textArea.style.top = 0;
@@ -545,7 +547,11 @@ export default {
       padding: 10px;
       font-size: 16px;
       font-weight: bold;
-      &:hover {
+      p {
+        width: 100%;
+        cursor: pointer;
+      }
+      p.InterestItemAct:hover {
         cursor: pointer;
         text-decoration: underline;
       }

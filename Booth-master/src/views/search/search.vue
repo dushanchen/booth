@@ -56,7 +56,7 @@
               @click="toDetailsOne(item.id)"
             >
               <div class="exhibitionItemImg">
-                <img :src="`${item.bannerUrl.split(',')[0]}`" alt>
+                <img :src="`${item.bannerUrl.split(',')[0]}`" alt />
               </div>
               <div class="exhibitionItemName">{{item.nameEng}} {{item.name}}</div>
             </div>
@@ -73,13 +73,13 @@
           <div class="brochureList">
             <div class="brochureItem" v-for="(item, index) in searchList.brochures" :key="index">
               <div class="brochureItemImg" @click="lookbrochure(item.pdfUrl, item.id)">
-                <img :src="`${item.coverUrl}`" alt>
+                <img :src="`${item.coverUrl}`" alt />
               </div>
               <div class="brochureItemText">
                 <div class="brochureItemHead">
                   <div class="brochureItemName">
                     <div class="brochureItemLogo" @click="toOthercore(item.id)" v-if="item.logoUrl">
-                      <img :src="`${item.logoUrl}`" alt>
+                      <img :src="`${item.logoUrl}`" alt />
                     </div>
                     <div class="brochureLogoName">
                       <p @click="toOthercore(item.id)">{{item.name}}</p>
@@ -118,7 +118,7 @@
             <div class="companyItem" v-for="(item, index) in searchList.companies" :key="index">
               <div class="enterpriseItemLeft">
                 <div class="enterpriseItemHead" @click="toOthercore(item.id)">
-                  <img :src="`${item.logoUrl}`" alt>
+                  <img :src="`${item.logoUrl}`" alt />
                 </div>
                 <div class="enterpriseItemLeftTitle">
                   <p @click="toOthercore(item.id)">{{item.name}}</p>
@@ -142,8 +142,13 @@
           </div>
           <div class="searchimagesList" v-if="searchList.imageNum === 0">暂无数据</div>
           <div class="searchimagesList">
-            <div class="searchimagesItem" v-for="(item, index) in searchList.images" :key="index">
-              <img :src="`${item.url}`" alt>
+            <div
+              class="searchimagesItem"
+              v-for="(item, index) in searchList.images"
+              :key="index"
+              @click="showboxBigImg(index)"
+            >
+              <img :src="`${item.url}`" alt />
             </div>
           </div>
         </div>
@@ -160,7 +165,7 @@
               <div class="homeListHead">
                 <div class="homeListImg">
                   <div @click="toOthercore(item.id)">
-                    <img :src="`${item.logoUrl}`" alt>
+                    <img :src="`${item.logoUrl}`" alt />
                   </div>
                 </div>
                 <div class="homeListTitle">
@@ -176,7 +181,7 @@
               <div class="hometext">{{item.summary}}</div>
               <!-- <div class="moveBtn" @click="toOthercore(item.id)">更多</div> -->
               <div class="homeItemImg">
-                <img :src="`${item.introductionUrl}`" alt>
+                <img :src="`${item.introductionUrl}`" alt />
               </div>
             </div>
           </div>
@@ -197,6 +202,16 @@
         <span @click="quxiao">关闭</span>
       </div>
     </div>
+    <div class="ImgBox" v-if="imgBoxShow" @click="showboxBigImg() ">
+      <div class="ImgBoxImg ImgBoxImgLeft" @click.stop="lookImgLeft()">
+        <img src="../../assets/images/left.png" alt />
+      </div>
+      <p>{{searchList.images[imgIndex].description}}</p>
+      <img :src="searchList.images[imgIndex].url" alt style="height:80vh"/>
+      <div class="ImgBoxImg ImgBoxImgRight" @click.stop="lookImgRight()">
+        <img src="../../assets/images/right.png" alt />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -208,7 +223,9 @@ export default {
     return {
       showBox: false,
       showBoxTwo: false,
-      center: this.$route.query.center,
+      imgBoxShow: false,
+
+      center: "",
       searchList: {
         brochureNum: "", // 册子
         companyNum: "", // 公司
@@ -220,17 +237,22 @@ export default {
         events: [],
         exhibitions: [],
         images: []
-      }
+      },
+      imgIndex:'' 
     };
   },
-  created() {
+  mounted() {
     window.scrollTo(0, 0);
-
+    this.center = this.$route.query.center;
     console.log(this.$route.query.center);
     this._search();
   },
   methods: {
-    _search() {
+    _search(val) {
+      if (val) {
+        console.log(val);
+        this.center = val;
+      }
       search(this.center).then(res => {
         if (res.data.code === 0) {
           this.searchList = res.data.data;
@@ -246,6 +268,28 @@ export default {
           }
         }
       });
+    },
+    showboxBigImg(index, id) {
+      this.imgIndex = index;
+      console.log(this.imgIndex);
+      this.imgBoxShow = !this.imgBoxShow;
+      // viewPicture(id, this.$store.state.user.UserID).then(res => {
+      //   if (res.data.code === 0) {
+      //     console.log("查看成功");
+      //   }
+      // });
+    },
+    lookImgLeft() {
+      if (this.imgIndex === 0) {
+        return;
+      }
+      this.imgIndex = this.imgIndex - 1;
+    },
+    lookImgRight() {
+      if (this.imgIndex > this.searchList.images.length - 1) {
+        return;
+      }
+      this.imgIndex = this.imgIndex + 1;
     },
     lookbrochure(url, id) {
       if (!this.$store.state.user.UserID) {
@@ -351,7 +395,7 @@ export default {
     },
     copyUrl(id) {
       // var clipBoardContent = "";
-      let url = `http://47.101.165.134/#/othercore?id=${id}`;
+      let url = `http://www.booth.vip/#/othercore?id=${id}`;
       let textArea = document.createElement("textarea");
       textArea.style.position = "fixed";
       textArea.style.top = 0;
@@ -688,6 +732,7 @@ export default {
             background: #fff;
             margin-right: 10px;
             margin-bottom: 10px;
+            cursor: pointer;
           }
         }
       }
@@ -846,6 +891,47 @@ export default {
           }
         }
       }
+    }
+  }
+  .ImgBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba($color: #000000, $alpha: 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .ImgBoxImg {
+      width: 30px;
+      height: 70px;
+      margin: 0 100px;
+      position: absolute;
+      border: none;
+      cursor: pointer;
+      img {
+        width: 100%;
+      }
+    }
+    .ImgBoxImgLeft {
+      position: absolute;
+      border: none;
+      left: 0;
+    }
+    .ImgBoxImgRight {
+      position: absolute;
+      border: none;
+      right: 0;
+    }
+    img {
+      width: 45%;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #fff;
     }
   }
 }

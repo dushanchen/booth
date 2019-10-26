@@ -4,9 +4,9 @@
       <!-- 无用户 -->
       <div class="LoginItem" v-if="!this.$store.state.user.UserID">
         <div class="sign">
-          <img src="../../assets/images/home/signUp.png" alt>
+          <img src="../../assets/images/home/signUp.png" alt />
           <div class="signIcon">
-            <img src="../../assets/images/icon/man.png" alt>
+            <img src="../../assets/images/icon/man.png" alt />
           </div>
         </div>
         <div class="signBtn" @click="toSign">加入booth</div>
@@ -14,7 +14,7 @@
       <!-- 有用户 -->
       <div class="LoginItem" v-else>
         <div class="LoginItemLogo">
-          <img :src="`${this.$store.state.userData.logoPicUrl}`" alt>
+          <img :src="`${this.$store.state.userData.logoPicUrl}`" alt />
         </div>
         <div class="LoginItemTitle">
           <p>{{this.$store.state.userData.name}}</p>
@@ -35,7 +35,7 @@
               :key="index"
               @click="toOthercore(item.id)"
             >
-              <img :src="`${item.logoUrl}`" alt>
+              <img :src="`${item.logoUrl}`" alt />
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
               :key="index"
               @click="toOthercore(item.id)"
             >
-              <img :src="`${item.logoUrl}`" alt>
+              <img :src="`${item.logoUrl}`" alt />
             </div>
           </div>
         </div>
@@ -67,10 +67,13 @@
                 <!-- <div class="enterpriseItemHeadBg" v-if="item.user.logoUrl == null">
                   <img src="../../assets/images/icon/man.png" alt>
                 </div>-->
-                <img :src="`${item.user.logoUrl}`" alt>
+                <img :src="`${item.user.logoUrl}`" alt />
               </div>
               <div class="enterpriseItemLeftTitle">
-                <p @click="toOthercore(item.user.id)" v-if="item.user.nameShort">{{item.user.nameShort}}</p>
+                <p
+                  @click="toOthercore(item.user.id)"
+                  v-if="item.user.nameShort"
+                >{{item.user.nameShort}}</p>
                 <p @click="toOthercore(item.user.id)" v-else>{{item.user.name}}</p>
                 <p>{{item.user.fansNumber}}位关注者</p>
                 <p
@@ -89,7 +92,7 @@
               <span>已参加</span>
               <p>
                 {{item.exhibition.nameEng}}
-                <br>
+                <br />
                 {{item.exhibition.name}}
               </p>
             </div>
@@ -163,7 +166,7 @@ export default {
       });
     },
     copyUrl(id) {
-      let url = `http://47.101.165.134/#/othercore?id=${id}`;
+      let url = `http://www.booth.vip/#/othercore?id=${id}`;
       let textArea = document.createElement("textarea");
       textArea.style.position = "fixed";
       textArea.style.top = 0;
@@ -187,13 +190,12 @@ export default {
       alert("企业连接已复制!");
     },
     toOthercore(id) {
-      // if (!this.$store.state.user.UserID) {
-      //   this.showBox = true;
-      // } else {
-      this.$router.push({
-        path: `/othercore`,
+      let routeData = this.$router.resolve({
+        path: "/othercore",
         query: { id: id }
       });
+      window.open(routeData.href, "_blank");
+      // window.open(href, "_blank");
       // }
     },
     toenterprise() {
@@ -218,6 +220,12 @@ export default {
           name: `productList`,
           query: { id: id }
         });
+
+        // let routeData = this.$router.resolve({
+        //   name: "productList",
+        //   query: { id: id }
+        // });
+        // window.open(routeData.href, "_blank");
       }
     },
     tologinList() {
@@ -282,7 +290,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        >img {
+        > img {
           width: 90px;
         }
         .signIcon {

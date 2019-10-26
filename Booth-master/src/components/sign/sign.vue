@@ -5,22 +5,22 @@
         <i class="icon iconClose"></i>
       </div>
       <div class="LoginImg">
-        <img src="../../assets/images/home/signUp.png" alt>
+        <img src="../../assets/images/home/signUp.png" alt />
         <div class="LoginIcon">
-          <img src="../../assets/images/icon/man.png" alt>
+          <img src="../../assets/images/icon/man.png" alt />
         </div>
       </div>
       <div class="LoginInput">
         <div class="inpList">
-          <input type="text" placeholder="企业简称" v-model="user.nameShort">
+          <input type="text" placeholder="企业简称" v-model="user.nameShort" />
           <p class="Err">{{usernameErr}}</p>
         </div>
         <div class="inpList">
-          <input type="password" placeholder="密码" v-model="user.password">
+          <input type="password" placeholder="密码" v-model="user.password" />
           <p class="Err">{{passwordErr}}</p>
         </div>
         <div class="inpList">
-          <input type="text" placeholder="邮箱" v-model="user.email">
+          <input type="text" placeholder="邮箱" v-model="user.email" />
           <p class="Err">{{emlErr}}</p>
         </div>
         <div class="LoginBtn" @click="toSign">
@@ -45,7 +45,7 @@ export default {
         nameShort: "",
         email: "",
         password: "",
-        username: '',
+        username: ""
       },
       userID: ""
     };
@@ -53,7 +53,7 @@ export default {
   methods: {
     _register() {
       // this.user.nameShort = this.user.username
-      this.user.username = this.user.nameShort
+      this.user.username = this.user.nameShort;
       register(this.user).then(res => {
         if (res.data.code === 500502) {
           this.emlErr = res.data.msg;

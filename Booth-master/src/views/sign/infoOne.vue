@@ -91,7 +91,7 @@
             </div>
           </div>
           <div class="signBgMainFoot">
-            <span @click="preservation">保存并返回到首页</span>
+            <span @click="preservation">保存并返回到主页</span>
             <span @click="toNext">下一页</span>
           </div>
         </div>
@@ -166,7 +166,7 @@ export default {
         if (res.data.code === 0) {
           setUser(this.$store.state.user.UserID);
           this.$router.push({
-            path: `/home`
+            path: `/core`
           });
         } else if (res.data.code === 500511) {
           alert('不好意思,该企业中文名称已被注册,请更改企业名称或者致电400-901-8021申述此名称')
@@ -251,6 +251,7 @@ export default {
     },
     inputFunc() {
       // 搜索 1
+      // this.$store.commit("SET_NAME", this.userData.name);
       clearInterval(this.timer);
       this.setTime();
     },
@@ -258,7 +259,9 @@ export default {
       this.serachList = [];
     },
     preservation() {
-      this.$store.commit("SET_NAME", this.userData.name);
+      console.log(this.userData.name)
+       this.$store.commit("SET_NAME", this.userData.name);
+       console.log(this.$store.state.userData.name)     
       this.$store.commit("SET_NAMEENG", this.userData.nameEng);
       this.$store.commit("SET_NAMESHORT", this.userData.nameShort);
       this.$store.commit("SET_MEMBER", this.userData.member);
@@ -273,6 +276,7 @@ export default {
       for (let i = 0; i < this.$store.state.userData.imgListUrlArr.length; i++) {
          arr.push(this.$store.state.userData.imgListUrlArr[i].picture)
       }
+      this.formData = new FormData();
       this.formData.append("id", this.$store.state.user.UserID);
       this.formData.append("name", this.$store.state.userData.name);
       this.formData.append("engName", this.$store.state.userData.nameEng);

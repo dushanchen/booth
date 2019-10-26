@@ -3,8 +3,9 @@
     <Tab
       v-on:ShowLogin="ShowLogin"
       v-on:ShowSign="ShowSign"
+      @toSearch='toSearch'
     ></Tab>
-    <router-view></router-view>
+    <router-view ref="page"></router-view>
     <Food></Food>
     <Login
       v-if="loginState"
@@ -30,6 +31,11 @@ export default {
     };
   },
   methods: {
+    toSearch(val) {
+      console.log(val, '搜索')
+      this.$refs.page._search(val);
+      // console.log(this.$refs.page._search)
+    },
     ShowLogin(LoginState) {
       this.loginState = LoginState;
     },

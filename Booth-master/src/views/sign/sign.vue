@@ -1,5 +1,6 @@
 <template>
   <div class="signDetails">
+    <div class="signDetails-back" @click="toback">返回首页</div>
     <div class="signBg">
       <div class="signBgName">
         <p>入驻booth</p>
@@ -8,15 +9,15 @@
       <div class="signBgList" v-if="!userID">
         <div class="LoginInput">
           <div class="inpList">
-            <input type="text" placeholder="企业简称" v-model="user.username">
+            <input type="text" placeholder="企业简称" v-model="user.username" />
             <p class="Err">{{usernameErr}}</p>
           </div>
           <div class="inpList">
-            <input type="password" placeholder="密码" v-model="user.password">
+            <input type="password" placeholder="密码" v-model="user.password" />
             <p class="Err">{{passwordErr}}</p>
           </div>
           <div class="inpList">
-            <input type="text" placeholder="邮箱" v-model="user.email">
+            <input type="text" placeholder="邮箱" v-model="user.email" />
             <p class="Err">{{emlErr}}</p>
           </div>
           <div class="LoginBtn" @click="toSign">
@@ -34,7 +35,7 @@
         </div>
       </div>
       <div class="signBgLogo">
-        <img src="../../assets/images/home/logo.png" alt>
+        <img src="../../assets/images/home/logo.png" alt />
         <p>博商供应链</p>
         <div class="foot">上海麦屿信息科技有限公司</div>
       </div>
@@ -63,7 +64,7 @@ export default {
         username: "",
         email: "",
         password: "",
-        nameShort: ''
+        nameShort: ""
       }
     };
   },
@@ -83,16 +84,18 @@ export default {
               params: { id: this.userID }
             });
           } else {
-            this.$router.push({
-              name: `infoOne`,
-              params: { id: this.userID }
-            });
+            if (res.data.data) {
+              this.$router.push({
+                name: `infoOne`,
+                params: { id: this.userID }
+              });
+            }
           }
         }
       });
     },
     _register() {
-      this.user.nameShort = this.user.username
+      this.user.nameShort = this.user.username;
       register(this.user).then(res => {
         if (res.data.code === 500502) {
           this.emlErr = res.data.msg;
@@ -114,6 +117,11 @@ export default {
     },
     tureFlase() {
       this._isActivate();
+    },
+    toback() {
+      this.$router.push({
+        path: `/`
+      });
     },
     flaseFlase() {
       this.successbox = false;
@@ -161,6 +169,15 @@ export default {
   height: 100vh;
   background: #2c73a1;
   overflow: auto;
+  .signDetails-back {
+    width: 100px;
+    margin: 10px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #fff;
+    cursor: pointer;
+  }
   .signBg {
     height: 100%;
     width: 100%;

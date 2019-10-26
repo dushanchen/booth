@@ -11,7 +11,7 @@ module.exports = {
     disableHostCheck: true, // 加这个就没事啦。
     proxy: {
       '/api': {
-        target: 'http://47.101.165.134/booth',
+        target: 'http://www.booth.vip/booth',
         // target: 'http://10.1.23.209',
         changeOrigin: true,
         ws: true,

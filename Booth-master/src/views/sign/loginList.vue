@@ -1,20 +1,21 @@
 <template>
   <div class="signDetailslist">
+    <div class="signDetails-back" @click="toback">返回首页</div>
     <div class="signBg">
       <div class="signBgName">
         <p>登录</p>
       </div>
       <div class="LoginInput">
         <div class="inpList">
-          <input type="text" placeholder="邮箱/手机号/企业简称" v-model="UserData.username">
+          <input type="text" placeholder="邮箱/手机号/企业简称" v-model="UserData.username" />
           <p class="Err">{{usernameERR}}</p>
         </div>
         <div class="inpList">
-          <input type="password" placeholder="密码" v-model="UserData.password">
+          <input type="password" placeholder="密码" v-model="UserData.password" />
           <p class="Err">{{passwordERR}}</p>
         </div>
         <div class="inpList">
-          <input type="text" placeholder="验证码" v-model="UserData.code">
+          <input type="text" placeholder="验证码" v-model="UserData.code" />
           <div class="Listbtn" @click="_sendCode">
             <SIdentify :identifyCode="identifyCode"></SIdentify>
           </div>
@@ -29,7 +30,7 @@
         </div>
       </div>
       <div class="signBgLogo">
-        <img src="../../assets/images/home/logo1.png" alt>
+        <img src="../../assets/images/home/logo1.png" alt />
         <p>博商供应链</p>
         <div class="foot">上海麦屿信息科技有限公司</div>
       </div>
@@ -98,7 +99,8 @@ export default {
       if (
         this.UserData.username &&
         this.UserData.password &&
-        this.UserData.code
+        this.UserData.code &&
+        this.codeERR === ""
       ) {
         login(this.UserData).then(res => {
           if (res.data.code === 500505) {
@@ -129,6 +131,11 @@ export default {
         });
       }
     },
+    toback() {
+      this.$router.push({
+        path: `/`
+      });
+    },
     _sendCode() {
       this.identifyCode = "";
       this.makeCode(this.identifyCodes, 4);
@@ -156,6 +163,15 @@ export default {
   height: 100vh;
   background: #2c73a1;
   overflow: auto;
+  .signDetails-back {
+    width: 100px;
+    margin: 10px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #fff;
+    cursor: pointer;
+  }
   .signBg {
     height: 100%;
     width: 100%;

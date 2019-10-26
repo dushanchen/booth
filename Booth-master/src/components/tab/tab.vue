@@ -1,15 +1,17 @@
 <template>
   <div class="tab">
     <div class="tabLogo">
-      <img src="../../assets/images/home/logo.png" alt @click="toHome">
+      <img src="../../assets/images/home/logo.png" alt @click="toHome" />
       <div class="tabSearch">
         <input
           type="text"
           placeholder="搜索你感兴趣的企业/展会"
           v-model="searchData"
           @keyup.enter="toSearch"
-          @focus="searchstate = true"
-        >
+          @focus="searchstate= true"
+          @blur="searchstate= false"
+        />
+        <!--  -->
         <i class="icon iconSearch" @click="toSearch"></i>
         <div class="Searchbox tabSearchleft" v-if="searchstate">
           <div class="tabSearchboxleft">
@@ -36,27 +38,26 @@
       </div>
     </div>
     <div class="tabLoging">
-      <router-link tag="a"  :to="{path:'/home'}">首页</router-link>
+      <router-link tag="a" :to="{path:'/home'}">首页</router-link>
       <!-- <router-link tag="a"  @click="toHome"  :to="{path:'/home',query:{id:'1'}}">首页</router-link> -->
-      <router-link tag="a"  :to="{path:'/exhibition'}">展会</router-link>
-      <router-link tag="a"  :to="{path:'/enterprise'}">企业</router-link>
-      <router-link tag="a"  :to="{path:'/News'}">消息</router-link>
+      <router-link tag="a" :to="{path:'/exhibition'}">展会</router-link>
+      <router-link tag="a" :to="{path:'/enterprise'}">企业</router-link>
+      <router-link tag="a" :to="{path:'/News'}">消息</router-link>
       <!-- <div @click="toEnterprise">企业</div>
       <div @click="toNews">消息</div>-->
       <div @click="toSign" v-if="!this.$store.state.user.UserID">注册</div>
       <div @click="ShowLogin" v-if="!this.$store.state.user.UserID">登录</div>
       <div class="HeadImg HeadImgLogo" v-if="!this.$store.state.user.UserID" @click="ShowLogin">
-        <img src="../../assets/images/icon/man.png" alt>
+        <img src="../../assets/images/icon/man.png" alt />
       </div>
       <div @click="Cancellation" v-if="this.$store.state.user.UserID">注销</div>
       <router-link
         class="HeadImg"
         tag="a"
-        
         :to="{path:'/core'}"
         v-if="this.$store.state.user.UserID"
       >
-        <img :src="`${this.$store.state.userData.logoPicUrl}`" alt>
+        <img :src="`${this.$store.state.userData.logoPicUrl}`" alt />
       </router-link>
       <!-- <div class="HeadImg" @click="toCore" v-if="this.$store.state.user.UserID">
         <img :src="`${this.$store.state.userData.logoPicUrl}`" alt>
@@ -102,6 +103,7 @@ export default {
     };
   },
   created() {
+    this.searchData = this.$route.query.center;
     this._getIndustry();
     console.log(this.One, this.Two);
   },
@@ -113,6 +115,9 @@ export default {
           this.items = this.industryData[this.One - 1].secondIndustries;
         }
       });
+    },
+    focusfun() {
+      this.searchstate = true;
     },
     mouseOver(index, data) {
       this.typeindex = index;
@@ -152,7 +157,7 @@ export default {
     Cancellation() {
       let con;
       con = confirm("确定要退出该账户么？");
-      if (!con) return
+      if (!con) return;
       removeUser();
       removeOne();
       removeTwo();
@@ -167,6 +172,7 @@ export default {
         path: `/search`,
         query: { center: this.searchData }
       });
+      this.$emit("toSearch", this.searchData);
     },
     toNews() {
       if (!this.$store.state.user.UserID) {

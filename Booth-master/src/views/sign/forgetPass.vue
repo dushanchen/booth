@@ -6,7 +6,7 @@
       </div>
       <div class="LoginInput" v-if="showemilbox">
         <div class="inpList">
-          <input type="text" placeholder="请求输入邮箱" v-model="UserData.username">
+          <input type="text" placeholder="请输入邮箱地址" v-model="UserData.username">
           <p class="Err">{{usernameERR}}</p>
         </div>
         <div class="inpList">
@@ -15,27 +15,27 @@
           <div class="Listbtn" @click="_sendCode">发送</div>
           <p class="Err">{{codeERR}}</p>
         </div>
-        <div class="forgetPass">
+        <!-- <div class="forgetPass">
           <span @click="ToLogin">去登录</span>
           <span @click="ToSign">去注册</span>
-        </div>
+        </div> -->
         <div class="LoginBtn">
           <span @click="_login">确认</span>
         </div>
       </div>
       <div class="LoginInput" v-if="showemilbox1">
         <div class="inpList">
-          <input type="password" placeholder="请求输入新密码" v-model="password">
+          <input type="password" placeholder="请输入新密码" v-model="password">
           <p class="Err">{{passworderr}}</p>
         </div>
         <div class="inpList">
-          <input type="password" placeholder="请求重新输入新密码" v-model="newpassword">
+          <input type="password" placeholder="请重新输入新密码" v-model="newpassword">
           <p class="Err">{{newpassworderr}}</p>
         </div>
-        <div class="forgetPass">
+        <!-- <div class="forgetPass">
           <span @click="ToLogin">去登录</span>
           <span @click="ToSign">去注册</span>
-        </div>
+        </div> -->
         <div class="LoginBtn">
           <span @click="_loginlist">确认修改</span>
         </div>
@@ -43,7 +43,7 @@
       <div class="LoginInput" v-if="showtrue">
         <p>密码修改成功</p>
         <div class="LoginBtn">
-          <span @click="ToSign">去登录</span>
+          <span @click="ToLogin">去登录</span>
         </div>
       </div>
       <div class="signBgLogo">

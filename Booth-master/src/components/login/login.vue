@@ -10,21 +10,21 @@
           <p>登录</p>
         </div>
         <div class="LoginIcon">
-          <img src="../../assets/images/icon/man.png" alt>
+          <img src="../../assets/images/icon/man.png" alt />
         </div>
       </div>
       <div class="LoginInput">
         <div class="inpList">
-          <input type="text" placeholder="邮箱/手机号/企业简称" v-model="UserData.username">
+          <input type="text" placeholder="邮箱/手机号/企业简称" v-model="UserData.username" />
           <p class="Err">{{usernameERR}}</p>
         </div>
         <div class="inpList">
-          <input type="password" placeholder="密码" v-model="UserData.password">
+          <input type="password" placeholder="密码" v-model="UserData.password" />
           <p class="Err">{{passwordERR}}</p>
         </div>
         <div class="inpList">
           <!-- <p class="inpText">验证码已发送您注册的邮箱中</p> -->
-          <input type="text" placeholder="验证码" v-model="UserData.code">
+          <input type="text" placeholder="验证码" v-model="UserData.code" />
           <div class="Listbtn" @click="_sendCode">
             <SIdentify :identifyCode="identifyCode"></SIdentify>
           </div>
@@ -44,7 +44,7 @@
 <script>
 import { login, sendCode, ERR_OK } from "@/api/api.js";
 import { setUser, setOne, setTwo } from "@/utils/auth.js";
-import SIdentify from "@/base/SIdentify/SIdentify"
+import SIdentify from "@/base/SIdentify/SIdentify";
 
 export default {
   name: "login",
@@ -91,17 +91,18 @@ export default {
       }
       if (!this.UserData.code) {
         this.codeERR = "请输入验证码";
-        this._sendCode()
+        this._sendCode();
       } else if (this.UserData.code != this.identifyCode) {
         this.codeERR = "验证码错误";
-        this._sendCode()
+        this._sendCode();
       } else {
         this.codeERR = "";
       }
       if (
         this.UserData.username &&
         this.UserData.password &&
-        this.UserData.code
+        this.UserData.code &&
+        this.codeERR === ""
       ) {
         login(this.UserData).then(res => {
           if (res.data.code === 500505) {

@@ -73,13 +73,13 @@
                   :key="index"
                 >
                   <p>展会名称</p>
-                  <input disabled :value="userData.name">
+                  <input disabled :value="item.name">
                 </div>
               </div>
               <div v-if="!userData.exhibitions">
                 <div class="ExhibitionList">
                   <p>展会名称</p>
-                  <input disabled :value="userData.name">
+                  <input disabled :value="item.name">
                 </div>
               </div>
             </div>
@@ -216,7 +216,7 @@ export default {
         if (res.data.code === 0) {
           setUser(this.$store.state.user.UserID);
           this.$router.push({
-            path: `/home`
+            path: `/core`
           });
         } else if (res.data.code === 500511) {
           alert(
@@ -271,6 +271,7 @@ export default {
       ) {
         arr.push(this.$store.state.userData.imgListUrlArr[i].picture);
       }
+      this.formData = new FormData();
       this.formData.append("id", this.$store.state.user.UserID);
       this.formData.append("name", this.$store.state.userData.name);
       this.formData.append("nameShort", this.$store.state.userData.nameShort);

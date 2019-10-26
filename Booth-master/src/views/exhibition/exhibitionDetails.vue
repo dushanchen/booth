@@ -7,7 +7,7 @@
           v-for="(item, index) in detailsData.bannerUrl.split(',')"
           :key="index"
         >
-          <img :src="`${item}`" alt>
+          <img :src="`${item}`" alt />
         </div>
       </div>
     </div>
@@ -34,19 +34,19 @@
         </div>
       </div>
       <div class="exhibitionRight" @click="lookImg(detailsData.summaryPicture)">
-        <img :src="`${detailsData.summaryPicture}`" alt>
+        <img :src="`${detailsData.summaryPicture}`" alt />
       </div>
     </div>
     <div class="TitleHead" id="TitleHead">展会地图</div>
     <div class="Map" @click="lookImg(detailsData.mapUrl)">
-      <img :src="`${detailsData.mapUrl}`" alt>
+      <img :src="`${detailsData.mapUrl}`" alt />
     </div>
     <div class="exhibitionDetailsList" id="exhibitionDetailsList">
       <div class="TitleHead TitleHeadOne">
         <span :class="{act: indexType}" @click="TabNav(1)">参展商</span>
         <span :class="{act: !indexType}" @click="TabNav(2)">到访商</span>
         <div class="inputBox">
-          <input type="text" placeholder="搜索展位/展商" v-model="content">
+          <input type="text" placeholder="搜索展位/展商" v-model="content" />
           <i class="icon iconSearch1" @click="search()"></i>
         </div>
       </div>
@@ -56,7 +56,7 @@
           <!-- <p>{{item.stand}}</p> -->
           <div class="enterpriseItemLeft">
             <div class="enterpriseItemHead" @click="toOthercore(item.id)">
-              <img :src="item.logoUrl" alt>
+              <img :src="item.logoUrl" alt />
             </div>
             <div class="enterpriseItemLeftTitle">
               <p @click="toOthercore(item.id)">{{item.name}}</p>
@@ -78,7 +78,7 @@
         <div class="companyItemTwo" v-for="(item, index) in VisList" :key="index">
           <div class="companyItemTwoLeft">
             <div class="companyItemTwoLeftImg" @click="toOthercore(item.id)">
-              <img :src="item.logoUrl" alt>
+              <img :src="item.logoUrl" alt />
             </div>
             <div class="companyItemTwoLeftname">
               <p @click="toOthercore(item.id)">{{item.name}}</p>
@@ -105,7 +105,7 @@
       <p>{{detailsData.dateEng}}</p>
     </div>
     <div class="Map1" @click="lookImg(detailsData.trafficUrl)" id="Map1">
-      <img :src="`${detailsData.trafficUrl}`" alt>
+      <img :src="`${detailsData.trafficUrl}`" alt />
     </div>
     <div class="signUpBox" v-if="show">
       <div class="signUpBoxItem">
@@ -121,7 +121,7 @@
                 姓名
                 <!-- <span v-if="!item.name" class="Err">未输入</span> -->
               </p>
-              <input type="text" v-model="item.name" placeholder="请输入姓名">
+              <input type="text" v-model="item.name" placeholder="请输入姓名" />
             </div>
             <div class="signUpBoxListItemOne">
               <p>职务</p>
@@ -139,15 +139,27 @@
                 联系方式
                 <!-- <span v-if="!item.mobile" class="Err">未输入</span> -->
               </p>
-              <input type="text" v-model="item.mobile" placeholder="请输入邮箱或者电话">
+              <input type="text" v-model="item.mobile" placeholder="请输入邮箱或者电话" />
             </div>
             <div class="signUpBoxListItemTwo" style="width: 50%">
               <p>到场时间</p>
-              <datepicker :value="item.precentDate" format="YYYY-MM-DD" name="date2"></datepicker>
+              <datepicker
+                :value="item.precentDate"
+                ref="data1"
+                @selected="selected"
+                format="YYYY年MM月DD日"
+                name="date2"
+              ></datepicker>
             </div>
             <div class="signUpBoxListItemTwo" style="width: 50%">
               <p>离场时间</p>
-              <datepicker :value="precentDate" format="YYYY-MM-DD" name="date2"></datepicker>
+              <datepicker
+                v-model="item.outDate"
+                ref="data2"
+                :value="item.outDate"
+                format="YYYY年MM月DD日"
+                name="date2"
+              ></datepicker>
             </div>
           </div>
         </div>
@@ -183,7 +195,7 @@
     </div>
     <div class="sessceBox" v-if="SuccessBox" @click="hideSuccess">恭喜，报名成功！</div>
     <div class="sessceBox" v-if="SuccessBoxImg" @click="hideSuccess">
-      <img :src="SuccessImg" alt>
+      <img :src="SuccessImg" alt />
     </div>
     <div class="boxLoing" v-if="showBox2">
       <p>您还未登录，是否去登录？</p>
@@ -221,15 +233,16 @@ export default {
       indexType: true,
       typeIndex: "1",
       addHide: true,
-      precentDate: "2019-08-01",
+      // precentDateOne: "2019年08月01日",
+      // precentDateTwo:'',
       signUp: [
         {
           exhibitionId: this.$route.query.id,
           userId: getUser(),
           name: null,
           mobile: null,
-          precentDate: "2019-01-01",
-          outDate: "2019-01-01",
+          precentDate: "2019年01月01日",
+          outDate: "2019年01月01日",
           position: "1"
         }
       ],
@@ -402,11 +415,19 @@ export default {
       }
     },
     UpList() {
-      console.log("123");
-      console.log(this.signUp);
-      console.log(JSON.stringify(this.signUp).indexOf("null") != -1);
+      for (let i = 0; i < this.$refs.data1.length; i += 1) {
+        this.signUp[i].precentDate = this.$refs.data1[i].pickedValue
+          .replace("年", "-")
+          .replace("月", "-")
+          .replace("日", "");
+      }
+      for (let i = 0; i < this.$refs.data2.length; i += 1) {
+        this.signUp[i].outDate = this.$refs.data2[i].pickedValue
+          .replace("年", "-")
+          .replace("月", "-")
+          .replace("日", "");
+      }
       if (JSON.stringify(this.signUp).indexOf("null") != -1) {
-        console.log("123");
         return;
       } else {
         this._enrollExhibition();
@@ -418,14 +439,20 @@ export default {
         userId: getUser(),
         name: null,
         mobile: null,
-        precentDate: "2019-01-01",
-        outDate: "2019-01-01",
+        precentDate: "2019年01月01日",
+        outDate: "2019年01月01日",
         position: "1"
       };
       this.signUp.push(arr);
       if (this.signUp.length >= 4) {
         this.addHide = false;
       }
+    },
+    selected(item, index) {
+      console.log(item, 1);
+    },
+    outDate(item, index) {
+      console.log(item, index);
     },
     showBox() {
       if (!this.$store.state.user.UserID) {
@@ -440,15 +467,15 @@ export default {
             userId: getUser(),
             name: null,
             mobile: null,
-            precentDate: "2019-01-01",
-            outDate: "2019-01-01",
+            precentDate: "2019年01月01日",
+            outDate: "2019年01月01日",
             position: "1"
           }
         ];
       }
     },
     copyUrl(id) {
-      let url = `http://47.101.165.134/#/othercore?id=${id}`;
+      let url = `http://www.booth.vip/#/othercore?id=${id}`;
       let textArea = document.createElement("textarea");
       textArea.style.position = "fixed";
       textArea.style.top = 0;

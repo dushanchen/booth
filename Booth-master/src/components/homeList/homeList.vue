@@ -49,8 +49,8 @@
           <div class="InterestListSee" @click="toMover(item.user.id)">查看产品手册</div>
         </div>
       </div>
-      <div class="hometext" ref="heightlist">{{item.user.summary}}</div>
-      <div class="moveBtn" @click="toOthercore(index)" ref="moveBtn">更多</div>
+      <div class="hometext" ref="heightlist" >{{item.user.summary}}</div>
+      <div class="moveBtn" @click="toOthercore(index)" ref="moveBtn" >更多</div>
       <div class="homeItemImg">
         <img :src="`${item.user.introductionUrl}`" alt>
       </div>
@@ -119,7 +119,7 @@ export default {
       });
     },
     copyUrl(id) {
-      let url = `http://47.101.165.134/#/othercore?id=${id}`;
+      let url = `http://www.booth.vip/#/othercore?id=${id}`;
       let textArea = document.createElement("textarea");
       textArea.style.position = "fixed";
       textArea.style.top = 0;
@@ -364,8 +364,8 @@ export default {
     .hometext {
       margin: 10px 0;
       font-size: 14px;
-      line-height: 24px;
-      height: 120px;
+      line-height: 25px;
+      height: 100px;
       overflow: hidden;
       letter-spacing: 1px;
     }

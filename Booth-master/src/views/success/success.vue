@@ -1,7 +1,7 @@
 <template>
   <div class="success">
     <p v-if="success">激活成功</p>
-    <p v-if="!success">激活失败</p>
+    <p v-if="!success">激活{{text}}</p>
     <p v-if="success">3秒后自动返回首页...</p>
   </div>
 </template>
@@ -14,6 +14,7 @@ export default {
     return {
       success: "",
       timer: "",
+      text: '中...',
       url: window.location.href.split("?")[1]
     };
   },
@@ -31,6 +32,8 @@ export default {
           window.open(" ", "_self", " ");
           window.close();
         }, 3000);
+      } else {
+        this.text = '失败'
       }
     });
   }

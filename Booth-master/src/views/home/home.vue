@@ -15,7 +15,7 @@
         <span>企业资料完成度{{this.$store.state.userData.Percent}}%</span>
         <div>
           <p>普通会员</p>
-          <p @click="toSing">编辑企业资料</p>
+          <p @click="toSing">编辑资料</p>
         </div>
       </div>
       <div class="PercentageBox">
