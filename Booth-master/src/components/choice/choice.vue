@@ -5,6 +5,11 @@
       <i class="icon iconSearch" @click="toSearch"></i>
     </div>
     <p style="color:#fff;  text-align: center;margin: 6px 0;font-size:10px;">或</p>
+    <a-cascader
+      style='width: 100%;'
+      :options="options" 
+      placeholder="选择您的所属行业 Select your industry" 
+    />
     <div class="choiceBox" @click="choiceShow()">
       选择您的所属行业 Select your industry
       <div class="choiceList" v-if="choiceBoxshow" style="height: 189px;">
@@ -48,7 +53,30 @@ export default {
       searchData: "",
       industryData: [],
       items: [],
-      ToBooth: ""
+      ToBooth: "",
+      // options: [],
+      options: [
+          {
+            value: 'value',
+            label: '采矿业',
+            children: [
+              {
+                value: 'hangzhou',
+                label: "123",
+              },
+            ],
+          },
+          {
+            value: 'jiangsu',
+            label: '电力、热力、燃气及水生产和供应业',
+            children: [
+              {
+                value: 'nanjing',
+                label: 'Nanjing',
+              },
+            ],
+          },
+        ],
     };
   },
   created() {
